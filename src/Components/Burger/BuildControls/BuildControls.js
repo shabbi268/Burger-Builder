@@ -21,6 +21,13 @@ const buildControls = (props) => {
                 removeClicked = { () => props.removeIngredient(control.type) }
                 disableButton = {props.disableInfo[control.type]} ></BuildControl>
             ))}
+            <br></br>
+            <button 
+            className = {classes.OrderButton} 
+            disabled = {props.ingCount > 0 ? false : true}
+            onClick = {props.checkoutClicked}>
+            Check Out
+            </button>
         </div>
     )
 };

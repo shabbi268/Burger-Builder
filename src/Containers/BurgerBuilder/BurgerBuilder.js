@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Aux from '../../hoc/Aux';
 import Burger from '../../Components/Burger/Burger';
 import BuildControls from '../../Components/Burger/BuildControls/BuildControls';
+import Modal from '../../Components/UI/Modal/Modal';
+import OrderSummary from '../../Components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
     cheese: 0.5,
@@ -20,7 +22,9 @@ class BurgerBuilder extends Component{
                 cheese: 0,
                 meat: 0
             },
-            totalCost: 4
+            totalCost: 4,
+            totalIngredientsCount: 0,
+            showModal: false
         }
     };
 
@@ -34,9 +38,11 @@ class BurgerBuilder extends Component{
         const addCost = INGREDIENT_PRICES[type];
         const oldCost = this.state.totalCost;
         const newCost = oldCost + addCost;
+        const newTotalIngCount = this.state.totalIngredientsCount + 1;
         this.setState({
             ingredients: newIngredients,
-            totalCost: newCost
+            totalCost: newCost,
+            totalIngredientsCount: newTotalIngCount
         })
     };
 
@@ -50,13 +56,26 @@ class BurgerBuilder extends Component{
         const removeCost = INGREDIENT_PRICES[type];
         const oldCost = this.state.totalCost;
         const newCost = oldCost - removeCost;
+        const newTotalIngCount = this.state.totalIngredientsCount - 1;
         this.setState({
             ingredients: newIngredients,
-            totalCost: newCost
+            totalCost: newCost,
+            totalIngredientsCount: newTotalIngCount
         })
-
-
     };
+
+    checkoutHandler = () => {
+        const oldModalState = this.state.showModal;
+        this.setState({
+            showModal: !oldModalState
+        });
+    };
+
+    closeModalHandler = () => {
+        this.setState({
+            showModal: false
+        });
+    }
 
     render() {
         const disableButtonInfo = {
@@ -69,13 +88,21 @@ class BurgerBuilder extends Component{
 
         return (
             <Aux>
+                {this.state.showModal ? 
+                <Modal closeModal = {this.closeModalHandler}>
+                    <OrderSummary 
+                    ingredients = {this.state.ingredients}
+                    show = {this.state.showModal}>
+                    </OrderSummary>
+                </Modal> : null}
                 <Burger ingredients = { this.state.ingredients }></Burger>
                 <BuildControls 
                 addIngredient = {this.addIngredientHandler} 
                 removeIngredient = {this.removeIngredientHandler}
                 disableInfo = {disableButtonInfo}
                 price = {this.state.totalCost}
-                ></BuildControls>
+                ingCount = {this.state.totalIngredientsCount}
+                checkoutClicked = {this.checkoutHandler}></BuildControls>
             </Aux>
         );
     }
