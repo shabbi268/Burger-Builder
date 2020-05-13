@@ -65,9 +65,8 @@ class BurgerBuilder extends Component{
     };
 
     checkoutHandler = () => {
-        const oldModalState = this.state.showModal;
         this.setState({
-            showModal: !oldModalState
+            showModal: true
         });
     };
 
