@@ -27,6 +27,7 @@ class BurgerBuilder extends Component{
     };
 
     componentDidMount() {
+        console.log(this.props);
         axios.get('https://burger-builder-react-app-a3a48.firebaseio.com/ingredients.json')
         .then((response) => {
             this.setState({
@@ -87,37 +88,47 @@ class BurgerBuilder extends Component{
     };
 
     continuePurchaseHandler = () => {
-        this.setState({
-            isLoading: true
-        })
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalCost,
-            customer: {
-                name: 'Shabarish Kesa',
-                address: {
-                    city: 'Cincinnati',
-                    state: 'Ohio',
-                    zip: '45220'
-                },
-                email: 'shabarish.shabbi@gmail.com'
-            },
-            deliveryType: 'fast'
-        }
-        axios.post('/orders.json', order)
-        .then(response => {
-            this.setState({
-                isLoading: false
-            })
-            console.log(response);
-        })
-        .catch(err => {
-            this.setState({
-                isLoading: false
-            })
-            console.log(err)
-        });
+        // this.setState({
+        //     isLoading: true
+        // })
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalCost,
+        //     customer: {
+        //         name: 'Shabarish Kesa',
+        //         address: {
+        //             city: 'Cincinnati',
+        //             state: 'Ohio',
+        //             zip: '45220'
+        //         },
+        //         email: 'shabarish.shabbi@gmail.com'
+        //     },
+        //     deliveryType: 'fast'
+        // }
+        // axios.post('/orders.json', order)
+        // .then(response => {
+        //     this.setState({
+        //         isLoading: false
+        //     })
+        //     console.log(response);
+        // })
+        // .catch(err => {
+        //     this.setState({
+        //         isLoading: false
+        //     })
+        //     console.log(err)
+        // });
         // alert("Can Continue!");
+        const queryParams = [];
+        for(let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+        };
+        queryParams.push('price=' + this.state.totalCost)
+        const queryString = queryParams.join('&')
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     };
 
     render() {
