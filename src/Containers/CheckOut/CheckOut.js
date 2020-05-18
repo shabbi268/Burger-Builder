@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CheckOutSummary from '../../Components/CheckOutSummary/CheckOutSummary';
+import CheckOutSummary from '../../Components/Order/CheckOutSummary/CheckOutSummary';
 import { Route } from 'react-router-dom';
 import ContactData from '../CheckOut/ContactData/ContactData';
 
@@ -9,7 +9,7 @@ class CheckOut extends Component {
         totalPrice: 0
     };
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const query = new URLSearchParams(this.props.location.search);
         const ingredients = {};
         let price = 0;
@@ -46,7 +46,7 @@ class CheckOut extends Component {
                 checkoutContinued = {this.checkoutContinuedHandler}></CheckOutSummary>
                 <Route 
                 path = {this.props.match.url + "/contact-data"} 
-                render = {(props) => (<ContactData ingredients = {this.state.ingredients} price = {this.state.price} {...props}></ContactData>)}></Route>
+                render = {(props) => (<ContactData ingredients = {this.state.ingredients} price = {this.state.totalPrice} {...props}></ContactData>)}></Route>
             </div>
         )
     }
