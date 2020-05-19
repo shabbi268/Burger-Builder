@@ -13,7 +13,6 @@ class Orders extends Component {
             // console.log(res);
             const fetchedOrders =[];
             for(let key in res.data) {
-                // console.log(res.data[key]);
                 fetchedOrders.push({
                     ...res.data[key],
                     id: key
