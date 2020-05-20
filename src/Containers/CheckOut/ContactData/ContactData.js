@@ -84,9 +84,14 @@ class ContactData extends Component {
                         {value: 'Premium', displayValue: 'Premium'}
                     ]
                 },
-                value: ''
-            },
-        }
+                value: '',
+                validation: {
+
+                },
+                valid: true
+            }
+        },
+        formIsValid: false
     }
 
     checkValidity = (value, rules) => {
@@ -150,9 +155,14 @@ class ContactData extends Component {
         array2.value = event.target.value;
         array2.valid = this.checkValidity(array2.value, array2.validation);
         array2.touched = true;
+        let formIsValid = true;
+        for( let identifier in array1) {
+            formIsValid = array1[identifier].valid && formIsValid
+        }
         array1[identifier] =  array2;
         this.setState({
-            orderForm: array1
+            orderForm: array1,
+            formIsValid: formIsValid
         })
     }
 
@@ -174,11 +184,13 @@ class ContactData extends Component {
                     elementConfig = {element.elementConfig.elementConfig} 
                     value = {element.elementConfig.value}
                     touched = {element.elementConfig.touched}
+                    shouldValidate = {element.elementConfig.validation}
                     inputChanged = {(event) => this.changeHandler(event, element.id)}>
                     </Input>
                 })}
                 <Button 
                 buttonType = "Success"
+                disabled = {!this.state.formIsValid}
                 clicked = {this.orderHandler}>Order</Button>
             </form>
             )
