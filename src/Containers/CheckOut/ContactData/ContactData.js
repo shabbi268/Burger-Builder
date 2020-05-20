@@ -92,7 +92,7 @@ class ContactData extends Component {
             }
         },
         formIsValid: false
-    }
+    };
 
     checkValidity = (value, rules) => {
         let isValid = true;
@@ -106,7 +106,7 @@ class ContactData extends Component {
             isValid = value.length <= rules.maxLength && isValid;
         }
         return isValid;
-    } 
+    };
 
     orderHandler = (event) => {
         event.preventDefault();
@@ -147,7 +147,7 @@ class ContactData extends Component {
             console.log(err)
         });
         console.log(this.props.ingredients);
-    }
+    };
 
     changeHandler = (event, identifier) => {
         const array1 = {...this.state.orderForm}; // orderform - elements= name, email....
@@ -164,7 +164,7 @@ class ContactData extends Component {
             orderForm: array1,
             formIsValid: formIsValid
         })
-    }
+    };
 
     render() {
         let formElementsArray = [];
@@ -193,10 +193,12 @@ class ContactData extends Component {
                 disabled = {!this.state.formIsValid}
                 clicked = {this.orderHandler}>Order</Button>
             </form>
-            )
+        )
+        
         if (this.state.isLoading) {
             form = <Spinner></Spinner>
         }
+        
         return (
             <div className = {classes.ContactData}>
                 <h4>Enter your contact form</h4>
