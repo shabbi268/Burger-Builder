@@ -1,5 +1,5 @@
 {
-  "name": "burger-builder-starting-setup",
+  "name": "burger-builder-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -37,8 +37,10 @@
     "react": "^16.11.0",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.11.0",
+    "react-redux": "^7.2.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
