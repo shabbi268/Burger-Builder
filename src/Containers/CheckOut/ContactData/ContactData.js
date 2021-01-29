@@ -133,7 +133,7 @@ class ContactData extends Component {
             },
             deliveryType: this.state.orderForm.deliveryType.value
         }
-        axios.post('https://burger-builder-react-app-a3a48.firebaseio.com/orders.json', order)
+        axios.post('/orders.json', order)
         .then(response => {
             this.setState({
                 isLoading: false
