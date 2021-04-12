@@ -171,23 +171,6 @@ class ContactData extends Component {
 
     render() {
         let formElementsArray = [];
-        const cardElementOptions = {
-            style: {
-              base: {
-                fontSize: '16px',
-                color: '#fff',
-                '::placeholder': {
-                  color: '#87bbfd'
-                }
-              },
-              invalid: {
-                color: '#FFC7EE',
-                iconColor: '#FFC7EE'
-              }
-            },
-            hidePostalCode: true,
-          };
-
         for(let key in this.state.orderForm) {
             formElementsArray.push({
                 id: key,
