@@ -19,6 +19,8 @@ const order = (props) => {
     })
     return(
         <div className = {classes.Order}>
+            <p>Name: {props.customer.name}</p>
+            <p>Email: {props.customer.email}</p>
             <p>Ingredients: {igOutput}</p>
             <p>Price: <strong>{props.price}</strong></p>
         </div>
