@@ -5,7 +5,6 @@ import axios from '../../../axiosOrders';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Input from '../../../Components/UI/Input/Input';
 import {connect} from 'react-redux';
-
 class ContactData extends Component {
     state = {
         orderForm: {
@@ -109,7 +108,7 @@ class ContactData extends Component {
         return isValid;
     };
 
-    orderHandler = (event) => {
+    orderHandler = async (event) => {
         event.preventDefault();
         this.setState({
             isLoading: true
@@ -133,6 +132,7 @@ class ContactData extends Component {
             },
             deliveryType: this.state.orderForm.deliveryType.value
         }
+
         axios.post('/orders.json', order)
         .then(response => {
             this.setState({
@@ -166,6 +166,8 @@ class ContactData extends Component {
             formIsValid: formIsValid
         })
     };
+
+    
 
     render() {
         let formElementsArray = [];

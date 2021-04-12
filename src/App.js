@@ -5,18 +5,20 @@ import CheckOut from './Containers/CheckOut/CheckOut';
 import { Route, Switch } from 'react-router-dom';
 import Orders from './Containers/Orders/Orders';
 
+
 class App extends Component {
+
   render() {
     return (
       <div>
         <Layout>
-        <Switch>
-          <Route path = "/checkout" component = {CheckOut}></Route>
-          <Route path = "/orders" exact component = {Orders}></Route>
-          <Route path = "/" exact component = {BurgerBuilder}></Route>
-          {/* <BurgerBuilder></BurgerBuilder>
-          <CheckOut></CheckOut> */}
-        </Switch> 
+          <Switch>
+            <Route path = "/checkout" component = {CheckOut}></Route>
+            <Route path = "/orders" exact component = {Orders}></Route>
+            <Route path = "/" exact component = {BurgerBuilder}></Route>
+            {/* <BurgerBuilder></BurgerBuilder>
+            <CheckOut></CheckOut> */}
+          </Switch> 
         </Layout>
       </div>
     );
