@@ -11,8 +11,8 @@ export function sendEmail(mailOptions) {
     }
 
     emailjs.send(
-        'service_z8svvpd',
-        'template_e37ulal',
+        'service_vc437ph',
+        'template_iux67ej',
         templateParams,
         'user_BQa6pp6IQcfB51QbJd6MA'
     )
