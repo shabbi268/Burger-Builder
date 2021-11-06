@@ -5,6 +5,7 @@ import axios from '../../../axiosOrders';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Input from '../../../Components/UI/Input/Input';
 import {connect} from 'react-redux';
+import { sendEmail } from "../../../Components/UI/Mailer/mailer";
 class ContactData extends Component {
     state = {
         orderForm: {
@@ -140,6 +141,13 @@ class ContactData extends Component {
             })
             this.props.history.push('/');
             console.log(response);
+            const mailOptions = {
+                subject: 'Shabarish Shake Shack - Order Placed Successfully',
+                employeeName: this.state.orderForm.name.value,
+                message: 'You have successfully placed order for ' + this.props.price + '$',
+                userEmail: this.state.orderForm.email.value,
+            };
+            sendEmail(mailOptions);
         })
         .catch(err => {
             this.setState({
