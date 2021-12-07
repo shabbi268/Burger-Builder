@@ -5,6 +5,8 @@ import axios from '../../../axiosOrders';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Input from '../../../Components/UI/Input/Input';
 import {connect} from 'react-redux';
+import Payment from '../Payment/Payment';
+import { Route } from 'react-router-dom';
 class ContactData extends Component {
     state = {
         orderForm: {
@@ -91,7 +93,8 @@ class ContactData extends Component {
                 valid: true
             }
         },
-        formIsValid: false
+        formIsValid: false,
+        showPayment: false
     };
 
     checkValidity = (value, rules) => {
@@ -133,20 +136,25 @@ class ContactData extends Component {
             deliveryType: this.state.orderForm.deliveryType.value
         }
 
-        axios.post('/orders.json', order)
-        .then(response => {
-            this.setState({
-                isLoading: false
-            })
-            this.props.history.push('/');
-            console.log(response);
+        // axios.post('/orders.json', order)
+        // .then(response => {
+        //     this.setState({
+        //         isLoading: false
+        //     })
+        //     this.props.history.push('/');
+        //     console.log(response);
+        // })
+        // .catch(err => {
+        //     this.setState({
+        //         isLoading: false
+        //     })
+        //     console.log(err)
+        // });
+        this.setState({
+            isLoading: false,
+            showPayment: true
         })
-        .catch(err => {
-            this.setState({
-                isLoading: false
-            })
-            console.log(err)
-        });
+        this.props.history.replace('/checkout/payment');
         console.log(this.props.ingredients);
     };
 
@@ -203,9 +211,17 @@ class ContactData extends Component {
         }
         
         return (
-            <div className = {classes.ContactData}>
-                <h4>Enter your contact form</h4>
-                {form}
+            <div>
+                <div className = {classes.ContactData}>
+                    <h4>Enter your contact form</h4>
+                    {form}
+                </div>
+                <Route 
+                path = {this.props.match.url + "/payment"} 
+                component = {Payment}></Route>
+                <div>
+                    <Payment></Payment>
+                </div>
             </div>
         )
     }

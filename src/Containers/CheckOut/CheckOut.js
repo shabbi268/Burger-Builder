@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CheckOutSummary from '../../Components/Order/CheckOutSummary/CheckOutSummary';
 import { Route } from 'react-router-dom';
 import ContactData from '../CheckOut/ContactData/ContactData';
+import Payment from '../CheckOut/Payment/Payment';
 import { connect } from 'react-redux';
 
 class CheckOut extends Component {
@@ -23,6 +24,9 @@ class CheckOut extends Component {
                 <Route 
                 path = {this.props.match.url + "/contact-data"} 
                 component = {ContactData}></Route>
+                <Route 
+                path = {this.props.match.url + "/payment"} 
+                component = {Payment}></Route>
             </div>
         )
     }
